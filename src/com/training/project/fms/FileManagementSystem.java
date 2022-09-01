@@ -55,6 +55,7 @@ public class FileManagementSystem {
 			} else if (MainMenu.FILE_OPERATIONS.getOption().equalsIgnoreCase(userChoice)) {
 				executeFileOperationMenu();
 			} else if (MainMenu.EXIT.getOption().equalsIgnoreCase(userChoice)) {
+				System.out.println("Thank you for using this application. See you later. BYE :)");
 				return;
 			} else {
 				System.out.println("Wrong choice. Please try again.");
@@ -129,62 +130,79 @@ public class FileManagementSystem {
 	private void createFile() {
 		String filename;
 		System.out.println("You are adding a new file in root directory. Enter a file name :: ");
+
+		int invalidCount = 0;
+		
 		while (true) {
 			filename = getTextInput();
 
 			if (!validateFileName(filename)) {
 				System.out.println("Invalid file name. Please enter a valid name.");
+				invalidCount++;
+				
+				if(invalidCount > AppConstants.MAX_COUNT_INVALID_FILENAME) {
+					return;
+				}
+				
 				continue;
 			}
 
 			Thread fileAdditionThread = new Thread(new FileAddition(fileStack, filename));
 			fileAdditionThread.start();
+			
 			try {
 				fileAdditionThread.join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 
-			break;
+			return;
 		}
 	}
 
 	private void deleteFile() {
 		String filename;
 		System.out.println("You are deleting a file from root directory. Enter a file name :: ");
+		
+		int invalidCount = 0;
+		
 		while (true) {
 			filename = getTextInput();
 
 			if (!validateFileName(filename)) {
 				System.out.println("Invalid file name. Please enter a valid name.");
+				invalidCount++;
+				
+				if(invalidCount > AppConstants.MAX_COUNT_INVALID_FILENAME) {
+					return;
+				}
+				
 				continue;
 			}
 
 			Thread fileDeletionThread = new Thread(new FileDeletion(fileStack, filename));
 			fileDeletionThread.start();
+			
 			try {
 				fileDeletionThread.join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 
-			break;
+			return;
 		}
 	}
 
 	private void searchFile() {
 		String filename;
 		System.out.println("You are searching a file in root directory. Enter a file name :: ");
+		
 		while (true) {
 			filename = getTextInput();
-
-			if (!validateFileName(filename)) {
-				System.out.println("Invalid file name. Please enter a valid name.");
-				continue;
-			}
-
+			
 			Thread fileSearchThread = new Thread(new FileSearch(filename));
 			fileSearchThread.start();
+			
 			try {
 				fileSearchThread.join();
 			} catch (InterruptedException e) {

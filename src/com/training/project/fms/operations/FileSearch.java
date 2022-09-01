@@ -19,8 +19,9 @@ public class FileSearch implements Runnable {
 
 		if (count == 0) {
 			System.out.println("No files found with this file name [%s].");
-			return;
 		}
+		
+		System.out.println();
 	}
 
 	private void searchFile(File file) {
@@ -33,23 +34,39 @@ public class FileSearch implements Runnable {
 						String tempFilename = filename.replaceAll("\\*", "");
 						if (subFile.getName().contains(tempFilename)) {
 							count += 1;
+							if(count == 1) {
+								System.out.printf("List of files matched with provided file name [%s]:", filename);
+								System.out.println();
+							}
 							System.out.println(subFile.getAbsolutePath().substring(AppConstants.ROOT_FOLDER_LEN));
 						}
 					} else if (filename.startsWith("*")) {
 						String tempFilename = filename.replaceAll("\\*", "");
 						if (subFile.getName().endsWith(tempFilename)) {
 							count += 1;
+							if(count == 1) {
+								System.out.printf("List of files matched with provided file name [%s]:", filename);
+								System.out.println();
+							}
 							System.out.println(subFile.getAbsolutePath().substring(AppConstants.ROOT_FOLDER_LEN));
 						}
 					} else if (filename.endsWith("*")) {
 						String tempFilename = filename.replaceAll("\\*", "");
 						if (subFile.getName().startsWith(tempFilename)) {
 							count += 1;
+							if(count == 1) {
+								System.out.printf("List of files matched with provided file name [%s]:", filename);
+								System.out.println();
+							}
 							System.out.println(subFile.getAbsolutePath().substring(AppConstants.ROOT_FOLDER_LEN));
 						}
 					} else {
 						if (subFile.getName().equals(filename)) {
 							count += 1;
+							if(count == 1) {
+								System.out.printf("List of files matched with provided file name [%s]:", filename);
+								System.out.println();
+							}
 							System.out.println(subFile.getAbsolutePath().substring(AppConstants.ROOT_FOLDER_LEN));
 						}
 					}

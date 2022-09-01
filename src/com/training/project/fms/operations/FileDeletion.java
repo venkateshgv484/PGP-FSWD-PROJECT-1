@@ -19,6 +19,7 @@ public class FileDeletion implements Runnable {
 
 		if (!fileStack.searchFile(filename)) {
 			System.out.printf("No file found with this filename [%s].", filename);
+			System.out.println();
 			return;
 		}
 
@@ -26,12 +27,14 @@ public class FileDeletion implements Runnable {
 
 		if (!file.exists()) {
 			System.out.printf("No file found with this file name [%s].", filename);
+			System.out.println();
 			return;
 		}
 
 		deleteFile(file);
 		fileStack.removeFile(filename);
 		System.out.printf("File [%s] deleted successfully from the root directory.", filename);
+		System.out.println();
 	}
 
 	private void deleteFile(File file) {

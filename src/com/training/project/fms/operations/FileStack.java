@@ -35,6 +35,7 @@ public class FileStack {
 	public void display() {
 		if (fileList.size() == 0) {
 			System.out.println("No files available in ROOT directory.");
+			System.out.println();
 			return;
 		}
 
@@ -45,6 +46,8 @@ public class FileStack {
 		for (String filename : fileList) {
 			System.out.println(filename);
 		}
+		
+		System.out.println();
 	}
 
 }

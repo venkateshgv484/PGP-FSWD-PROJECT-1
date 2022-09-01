@@ -19,12 +19,14 @@ public class FileAddition implements Runnable {
 	public void run() {
 		if (fileStack.searchFile(filename)) {
 			System.out.printf("File has already exist with this file name [%s].", filename);
+			System.out.println();
 			return;
 		}
 
 		if (createFile()) {
 			fileStack.addFile(filename);
 			System.out.printf("File [%s] created successfully in the root directory.", filename);
+			System.out.println();
 			return;
 		}
 	}
